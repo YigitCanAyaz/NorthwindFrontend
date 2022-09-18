@@ -13,6 +13,7 @@ export class ProductComponent implements OnInit {
 
   products: Product[] = [];
   dataLoaded: boolean = false;
+  filterText: string = "";
 
   // productResponseModel: ProductResponseModel = {
   //   data: this.products,
