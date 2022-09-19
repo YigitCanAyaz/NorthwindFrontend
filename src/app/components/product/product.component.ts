@@ -1,3 +1,4 @@
+import { CartService } from './../../services/cart.service';
 import { ProductService } from './../../services/product.service';
 import { Product } from './../../models/product';
 import { Component, OnInit } from '@angular/core';
@@ -22,7 +23,7 @@ export class ProductComponent implements OnInit {
   //   success: true
   // };
 
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private toastrService: ToastrService) { }
+  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private toastrService: ToastrService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -53,6 +54,7 @@ export class ProductComponent implements OnInit {
       this.toastrService.error("Hata", "Bu ürün sepete eklenemez");
     } else {
       this.toastrService.success("Sepete eklendi", product.productName);
+      this.cartService.addToCart(product);
     }
   }
 
