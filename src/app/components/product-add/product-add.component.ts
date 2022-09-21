@@ -21,9 +21,9 @@ export class ProductAddComponent implements OnInit {
     // bu fonksiyon hangi alanlar html'de mapleneceğini ve kurallarını yazarız
     this.productAddForm = this.formBuilder.group({
       productName: ["", Validators.required],
+      categoryId: ["", Validators.required],
       unitPrice: ["", Validators.required],
-      unitsInStock: ["", Validators.required],
-      categoryId: ["", Validators.required]
+      unitsInStock: ["", Validators.required]
     });
   }
 
