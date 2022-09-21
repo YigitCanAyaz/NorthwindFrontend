@@ -29,6 +29,9 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<Product>>(newPath);
   }
 
+  // auth header'ı gönderiyoruz
+  // tek tek headerlerı eklemiyoruz dry prensibinden dolayı
+
   add(product: Product): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "products/add", product);
   }
