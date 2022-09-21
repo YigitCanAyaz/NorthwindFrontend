@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './../../services/auth.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -26,6 +28,20 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
+
+      // this.loginForm.value zaten obje dönüyor?
+      // değiştirmeye gerek yok sanırım bunu araştır
+      let loginModel = Object.assign({}, this.loginForm.value);
+
+      console.log(loginModel);
+
+      this.authService.login(loginModel).subscribe(response => {
+        this.toastrService.info(response.message);
+        localStorage.setItem("token", response.data.token);
+      }, responseError => {
+        // console.log(responseError);
+        this.toastrService.error(responseError.error);
+      });
     }
   }
 
