@@ -14,4 +14,12 @@ export class AuthService {
   login(loginModel: LoginModel) {
     return this.httpClient.post(this.apiUrl + "login", loginModel);
   }
+
+  isAuthenticated() {
+    if (localStorage.getItem("token")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
