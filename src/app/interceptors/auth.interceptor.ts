@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // kullanıcının yaptığı işlemi klonla
     // ekstra bir şey eklemek istiyorsak {data}
     newRequest = request.clone({
-      headers: request.headers.set("Authoratization", "Bearer " + token)
+      headers: request.headers.set("Authorization", "Bearer " + token)
     });
 
     return next.handle(newRequest);
